@@ -79,6 +79,8 @@ The `messageTemplate` property is also included on the scope as `$messageTemplat
 
 
 ## Release History
+ * v2.8.0 - 06/09/2016
+   * Support dynamic width/height
  * v2.7.0 - 06/09/2016
    * Fixed incorrect/early marginCenter calculation
  * v2.6.0 - 06/09/2016

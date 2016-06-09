@@ -90,18 +90,32 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
                         }
                         element
                             .css('transform', 'translateY('+top + 'px)')
-                            .css('margin-top','-' + (height+shadowHeight) + 'px')
-                            .css('visibility','visible');
+                            .css('margin-top','-' + (height+shadowHeight) + 'px');
                         j ++;
                     }
+                    templateElement.css('visibility','visible');
                 };
 
-                $timeout(function(){
-                    if (scope.$position === 'center'){
-                        scope.$centerMargin = '-' + (templateElement[0].offsetWidth /2) + 'px';
-                    }
-                    layoutMessages();
-                }, 100); // delay prevents from early/incorrect offsetWidth, before the element content is rendered
+                var adjustMarginLeft = function() {
+                    templateElement.css('margin-left', '-' + (templateElement[0].offsetWidth / 2) + 'px');
+                };
+
+                if (scope.$position === 'center') {
+                    // adjust center position more and more precise - each time it re-alignes and may resize
+                    // for elements with dynamic width/height, especially in small windows
+                    adjustMarginLeft();
+                    setTimeout(adjustMarginLeft, 10);
+                    setTimeout(adjustMarginLeft, 20);
+                    setTimeout(adjustMarginLeft, 30);
+                    setTimeout(adjustMarginLeft, 40);
+                    setTimeout(adjustMarginLeft, 50);
+                    setTimeout(function() {
+                        adjustMarginLeft();
+                        $timeout(layoutMessages, 100);
+                    }, 60);
+                } else {
+                    $timeout(layoutMessages, 100);
+                }
 
                 if (args.duration > 0){
                     $timeout(function(){
@@ -164,8 +178,7 @@ angular.module('cgNotify').run(['$templateCache', function($templateCache) {
     "<div class=\"cg-notify-message\" ng-class=\"[$classes, \n" +
     "    $position === 'center' ? 'cg-notify-message-center' : '',\n" +
     "    $position === 'left' ? 'cg-notify-message-left' : '',\n" +
-    "    $position === 'right' ? 'cg-notify-message-right' : '']\"\n" +
-    "    ng-style=\"{'margin-left': $centerMargin}\">\n" +
+    "    $position === 'right' ? 'cg-notify-message-right' : '']\">\n" +
     "\n" +
     "    <div ng-show=\"!$messageTemplate\">\n" +
     "        {{$message}}\n" +
