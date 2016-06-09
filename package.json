@@ -1,6 +1,6 @@
 {
   "name": "angular-notify",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "A minimalistic notification service for angular.",
   "repository": {
     "type": "git",

@@ -68,14 +68,10 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
                 angular.element(args.container).append(templateElement);
                 messageElements.push(templateElement);
 
-                if (scope.$position === 'center'){
-                    $timeout(function(){
-                        scope.$centerMargin = '-' + (templateElement[0].offsetWidth /2) + 'px';
-                    });
-                }
-
                 scope.$close = function(){
-                    templateElement.css('opacity',0).attr('data-closing','true');
+                    templateElement
+                        .css('opacity',0)
+                        .attr('data-closing','true');
                     layoutMessages();
                 };
 
@@ -92,14 +88,20 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
                         } else {
                             currentY += height + verticalSpacing;
                         }
-                        element.css('transform', 'translateY('+top + 'px)').css('margin-top','-' + (height+shadowHeight) + 'px').css('visibility','visible');
+                        element
+                            .css('transform', 'translateY('+top + 'px)')
+                            .css('margin-top','-' + (height+shadowHeight) + 'px')
+                            .css('visibility','visible');
                         j ++;
                     }
                 };
 
                 $timeout(function(){
+                    if (scope.$position === 'center'){
+                        scope.$centerMargin = '-' + (templateElement[0].offsetWidth /2) + 'px';
+                    }
                     layoutMessages();
-                });
+                }, 100); // delay prevents from early/incorrect offsetWidth, before the element content is rendered
 
                 if (args.duration > 0){
                     $timeout(function(){
