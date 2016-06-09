@@ -13,7 +13,11 @@ results
 
 npm-debug.log
 
+_SpecRunner.html
+
 node_modules
 .DS_Store
+.idea
+.grunt
 
 temp

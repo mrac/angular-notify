@@ -92,7 +92,7 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
                         } else {
                             currentY += height + verticalSpacing;
                         }
-                        element.css('top',top + 'px').css('margin-top','-' + (height+shadowHeight) + 'px').css('visibility','visible');
+                        element.css('transform', 'translateY('+top + 'px)').css('margin-top','-' + (height+shadowHeight) + 'px').css('visibility','visible');
                         j ++;
                     }
                 };
