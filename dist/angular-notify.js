@@ -90,10 +90,10 @@ angular.module('cgNotify', []).factory('notify',['$timeout','$http','$compile','
                         }
                         element
                             .css('transform', 'translateY('+top + 'px)')
-                            .css('margin-top','-' + (height+shadowHeight) + 'px');
+                            .css('margin-top','-' + (height+shadowHeight) + 'px')
+                            .css('visibility', 'visible');
                         j ++;
                     }
-                    templateElement.css('visibility','visible');
                 };
 
                 var adjustMarginLeft = function() {
