@@ -2,7 +2,7 @@
 
 >A minimalistic (and extensible) notification service for Angular.
 
-[Live Demo](http://cgross.github.io/angular-notify/demo/)
+[Live Demo](https://rawgit.com/mrac/angular-notify/master/demo/index.html)
 
 Supports IE 10, and recent versions of FF and Chrome.
 Animations work via CSS-transform (use GPU, avoiding expensive browser repaints).
@@ -80,7 +80,7 @@ The `messageTemplate` property is also included on the scope as `$messageTemplat
 
 ## Release History
  * v2.6.0 - 06/09/2016
-   * Animations work over 'transform', instead of 'top' (hardware acceleration)
+   * Animations work over CSS `transform`, instead of `top` (hardware acceleration)
  * v2.5.0 - 04/12/2015
    * New `duration` property per notification.
    * New `position` property per notification.
